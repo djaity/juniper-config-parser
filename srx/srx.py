@@ -35,27 +35,51 @@
 # apt-get install graphviz
 
 # ------------------
-# useful command lines:
+# Quick starting User's guide & useful command lines:
 # ------------------
-# To generate the xml file from the SRX (get srx config)
-# $ ssh ucp-ro@<srx ip 172.31> "show configuration | display xml" > srx.xml
-# $ ssh ucp-ro@<srx ip 172.31> "show arp" > srx_arp.xml
-# To get SRX hits counts
-# $ ssh ucp-ro@<srx ip 172.31> "show security policies hit-count" > srx.cnt
+# 1/ First you need to set your config file "srx.conf"
+# $ cp srx_default.conf srx.conf
+#
+# You need to edit this config file to set the srx_ip and srx_login of your SRX Device
+#    srx_ip = 10.0.0.1
+#    srx_login = user-ro
+#
+# 2/ Then you need to encrypt your SRX password in order to avoid
+#    - storing the password in a text format
+#    - having a trace of the SRX password anywhere including in the bash history
+#    - retyping everytime the password in the command line
+# $ ../common/pysec.py --enc -k key_default.enc
+#
+# 3/ eventually get all SRX configuration data and SRX counters to get all those information in a text format
+#    and manipulate those data without fetching the SRX all the time.
+#    this way you can historize SRX configuration file.
+# $ ./srx.py -getconf
+#
+# Note: the command above generate the following configuration and counters in the txt Format stored in "./data" directory
+# - show configuration | display xml
+# - show configuration | display set
+# - show security policies hit-count
+# - show security policies
+# - show security nat source rule all
+# - show security nat destination rule all
+#
+# After, those 3 very first steps, you can start using ./srx.py
+# all options are available by ./srx.py -h
 
-# To generate the graphe of all rules
+# some examples
+
+# From bash : To generate the graph of all rules
+# assuming all Viz files are going to be stored in a directory you created by "mkdir graphviz" before the following
 # $ for graph in `srx.py -rulescomb`; do srx.py -rulestree $graph > graphviz/$graph.viz; dot graphviz/$graph.viz -Tjpg -o graphs/$graph.jpg; done
 
 # To make a single image with all images generated : the goal is to be able to print it on A0 format
 # $ srx.py -mergeall graphviz
 
-
 # for graph in `srx.py -rulescomb`; do srx.py -rulestree $graph -port junos-https > junoshttps/$graph.viz; dot junoshttps/$graph.viz -Tjpg -o junoshttps/$graph.jpg; done
 # $ srx.py -mergeall junoshttps
 
-
 # To graph the link between Zones
-# rm graphTEST.jpg; srx.py -zpolicies -graphviz > graphTEST.viz; neato graphTEST.viz  -Tjpg -o graphTEST.jpg
+# rm graph.jpg; srx.py -zpolicies -graphviz > graph.viz; neato graph.viz  -Tjpg -o graph.jpg
 # ------------------
 
 from bs4 import BeautifulSoup as Soup
