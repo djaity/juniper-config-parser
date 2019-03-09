@@ -1,4 +1,4 @@
-# juniper-config-parses
+# juniper-config-parser
 
 ## Synopsis
 
