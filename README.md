@@ -16,9 +16,9 @@ The goal of this Juniper project is to dig into SRX configuration file very easi
 ./srx.py -laddrset
 ./srx.py -zoneaddrset Interne (this dig recursively into the address-set "Interne")
 
-# generate GraphViz file of all Policies between the zones DMZ & Interne
+### generate GraphViz file of all Policies between the zones DMZ & Interne
 ./srx.py -rulestree DMZ-Interne -graphviz > DMZ-Interne.viz
-# then, assuming Dot is installed on your system, the following command generate the JPEG representation of your Policies
+### then, assuming Dot is installed on your system, the following command generate the JPEG representation of your Policies
 dot viz.viz -Tjpg -o DMZ-Interne.jpg
 
 ./srx.py -dspwarn
