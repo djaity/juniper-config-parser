@@ -9,9 +9,11 @@ The goal of this Juniper project is to dig into SRX configuration file very easi
 - dig recursively into address-set
 - list SNAT & DNAT and export it into an Excel CSV format
 - list Application (port) to check doublon for example
+- historize configuration file (this will be done automatically through an option in command line, if resquested by users)
 
 ## Code Example
 
+* list SRX's Zones, Address-Set, Address-Set of a specific Zone 
 ./srx.py -lzone
 ./srx.py -laddrset
 ./srx.py -zoneaddrset Interne (this dig recursively into the address-set "Interne")
