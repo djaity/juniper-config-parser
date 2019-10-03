@@ -20,6 +20,7 @@
 
 # ----------------------------------------------------
 # on CentOS
+# yum install python-pexpect
 # yum install python-lxml
 # yum install python-netaddr
 # yum install python-beautifulsoup4
@@ -28,11 +29,13 @@
 
 # ----------------------------------------------------
 # on Ubuntu
+# apt-get install python-pexpect
 # apt-get install python-lxml
 # apt-get install python-netaddr
 # apt-get install python-bs4
 # apt-get install python-pil
 # apt-get install graphviz
+
 
 # ------------------
 # Quick starting User's guide & useful command lines:
@@ -337,9 +340,14 @@ if PARAM.getconf:
   # get the SRX configuration in XML format
   cmd='show configuration | display xml'
   try:
-    srx_conf = get_content_srx(srx_login, srx_ip, pw, cmd)
-  except pexpect.exceptions.TIMEOUT:
-    print "Timeout", cmd
+    try:
+      srx_conf = get_content_srx(srx_login, srx_ip, pw, cmd)
+    except pexpect.exceptions.TIMEOUT:
+      print "Timeout", cmd
+      exit()
+  except AttributeError, e:
+    print e
+    print "Package pexpect needs to be installed"
     exit()
 
   with open('data/srx_'+srx_ip+'.xml', 'w') as fd:
@@ -1688,8 +1696,8 @@ if PARAM.lsnat:
           separator + ','.join(nat_pool_ip) + \
           separator + translation_hits + \
           separator + rule_position + \
-          separator + successful_session + \
           separator + failed_session + \
+          separator + successful_session + \
           dest_match
 
 
