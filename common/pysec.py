@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # Copyright (c) 2007 Brandon Sterne
 # Licensed under the MIT license.
 # http://brandon.sternefamily.net/wp-content/uploads/2007/06/pyAES.txt
