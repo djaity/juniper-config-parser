@@ -407,7 +407,7 @@ if PARAM.getconf:
     print "Timeout", cmd
     exit()
 
-  with open('data/srx-snat_'+srx_ip+'.txt', 'w') as fd:
+  with open('data/srx_snat_'+srx_ip+'.txt', 'w') as fd:
     cntidx = fd.write(policy_sequences_indexes)
     fd.close()
 
@@ -420,7 +420,7 @@ if PARAM.getconf:
     print "Timeout", cmd
     exit()
         
-  with open('data/srx-dnat_'+srx_ip+'.txt', 'w') as fd:
+  with open('data/srx_dnat_'+srx_ip+'.txt', 'w') as fd:
     cntidx = fd.write(policy_sequences_indexes)
     fd.close()
 
@@ -444,11 +444,11 @@ try:
     policy_sequences_indexes = fd.read()
 
   # get read the TXT counter SNat file
-  with open('data/srx-snat_'+srx_ip+'.txt') as fd:
+  with open('data/srx_snat_'+srx_ip+'.txt') as fd:
     snat_counters_file = fd.read()
 
   # get read the TXT counter DNat file
-  with open('data/srx-dnat_'+srx_ip+'.txt') as fd:
+  with open('data/srx_dnat_'+srx_ip+'.txt') as fd:
     dnat_counters_file = fd.read()
 except IOError, Except_Argument:
   print Except_Argument
