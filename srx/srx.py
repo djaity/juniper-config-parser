@@ -294,7 +294,7 @@ def param_missing(param_name):
 def get_content_srx(login, ip, pw, cmd):
   output = ''
   child = pexpect.spawn ('ssh '+login+'@'+ip+' "'+cmd+'"')
-  child.timeout = 90
+  child.timeout = 180
   child.maxread = 100000
   child.waitnoecho()
   child.sendline(pw+"\n")
