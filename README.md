@@ -30,9 +30,22 @@ dot viz.viz -Tjpg -o DMZ-Interne.jpg
 ## Motivation
 
 This script has been first developed at Cergy Pontoise University by JT Graveaud, IT Network and Infrastructure Manager.<br>
-The first need of this script was to understand and to see policies, SNAT and DNAT more clearly in order to clean thousands of policies that became unreadable years after years. 
+The first need of this script was to understand and to see policies, SNAT and DNAT more clearly in order to clean thousands of policies that became unreadable years after years.
 
 ## Installation
+
+### Usage with Docker
+
+The python environment can be build as a local docker container with all the dependencies installed automatically, so they don't need to be managed on the host computer.
+
+Build the Docker image with tag 'config-parser' (the dot means that it uses the Dockerfile provided in the current directory):
+
+    docker build -t config-parser .
+
+Start the container with a bind mount in order to keep files in the container in sync with the host:
+
+    docker run -v $(pwd):/juniper-config-parser -it config-parser bash
+
 
 ------------------
 Quick starting User's guide & useful command lines:
@@ -57,7 +70,7 @@ $ ../common/pysec.py --enc -k key_default.enc
 - 3/ eventually get all SRX configuration data and SRX counters to get all those information in a text format
    and manipulate those data without fetching the SRX all the time.<br>
    This way you can historize SRX configuration file.
-   
+
 $ ./srx.py -getconf
 
 Note: the command above generate the following configuration and counters in the txt Format stored in "./data" directory<br>
